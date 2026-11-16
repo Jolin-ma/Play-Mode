@@ -12,6 +12,8 @@ const OBJECTS = [
   { src: "/art/objects/pickle-cake.webp", w: 512, h: 434 },
   { src: "/art/objects/brain.webp", w: 512, h: 462 },
   { src: "/art/objects/lipstick.webp", w: 511, h: 512 },
+  { src: "/art/objects/martini-hand.webp", w: 381, h: 512 },
+  { src: "/art/objects/pickle-woman.webp", w: 512, h: 369 },
 ] as const;
 
 interface Piece {

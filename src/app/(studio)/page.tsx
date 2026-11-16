@@ -73,25 +73,25 @@ export default function Home() {
         </Reveal>
       </Section>
 
-      <Section tone="blue">
+      <Section>
         <div className="grid items-center gap-12 lg:grid-cols-12">
           <Reveal
             delay={0.1}
-            className="order-last lg:order-first lg:col-span-5"
+            className="order-last lg:order-first lg:col-span-6"
           >
             {/* Frame turns oval on hover. The photo shrinks inside it so the oval never cuts off the arm. */}
-            <div className="group max-w-[32rem] overflow-hidden rounded-none border-2 border-night bg-[#d2b8e7] shadow-[6px_6px_0_0_rgba(0,0,0,0.35)] transition-[border-radius] duration-500 ease-out hover:rounded-[50%] motion-reduce:transition-none">
+            <div className="group max-w-[44rem] overflow-hidden rounded-none border-2 border-cream bg-[#d2b8e7] transition-[border-radius] duration-500 ease-out hover:rounded-[50%] motion-reduce:transition-none">
               <Image
                 src="/art/arm.png"
                 alt="A flexed arm, the bicep wrapped in a glossy red sleeve, against a lilac background."
                 width={832}
                 height={842}
-                sizes="(min-width: 1024px) 40vw, 100vw"
+                sizes="(min-width: 1024px) 50vw, 100vw"
                 className="block h-auto w-full origin-[90%_50%] transition-transform duration-500 ease-out group-hover:scale-[0.82] motion-reduce:transition-none"
               />
             </div>
           </Reveal>
-          <Reveal className="lg:col-span-7">
+          <Reveal className="lg:col-span-6">
             <p className="max-w-5xl font-display text-display-md font-bold">
               Explore the shifts shaping design and culture.
             </p>
