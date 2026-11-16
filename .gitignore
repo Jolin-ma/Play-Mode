@@ -1,0 +1,32 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+*.tsbuildinfo
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+
+# Vercel CLI project links (created by `vercel link`)
+.vercel
+
+# Local secrets. .env.example stays committed.
+.env
+.env.*
+*.env
+!.env.example
+
+
+# Uncompressed photo/video masters. Kept locally as the source for any
+# optimised assets, but too heavy to carry in the repo.
+assets-source/
+
+# JetBrains IDE settings
+.idea/
