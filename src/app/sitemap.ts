@@ -4,6 +4,7 @@ import { site } from "@/data/site";
 
 const routes = [
   "",
+  "/studio",
   "/perspective",
   "/work",
   "/approach",

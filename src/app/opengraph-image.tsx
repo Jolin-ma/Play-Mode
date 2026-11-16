@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-export const alt = "Play Mode. A creative strategy and storytelling studio.";
+export const alt = "Play Mode. Stories you can step into.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -60,11 +60,11 @@ export default async function OpengraphImage() {
           letterSpacing: "-0.04em",
         }}
       >
-        <div style={{ display: "flex" }}>What is changing</div>
+        <div style={{ display: "flex" }}>Stories</div>
         <div style={{ display: "flex" }}>
-          <span style={{ color: ORANGE, marginRight: 28 }}>in culture</span>
+          <span style={{ color: ORANGE, marginRight: 28 }}>you can</span>
         </div>
-        <div style={{ display: "flex" }}>is your next move.</div>
+        <div style={{ display: "flex" }}>step into.</div>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
         <div
@@ -78,7 +78,7 @@ export default async function OpengraphImage() {
             borderRadius: 9999,
           }}
         >
-          Creative strategy and storytelling
+          Interactive stories
         </div>
       </div>
     </div>,

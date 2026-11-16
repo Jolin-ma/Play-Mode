@@ -1,6 +1,9 @@
 export const site = {
   name: "Play Mode",
   wordmark: "play mode",
+  tagline: "Stories you can step into.",
+  description:
+    "Play Mode makes interactive projects that let people experience an idea: games, 3D worlds and small experimental tools, each built around a story.",
   location: "Oshawa, Ontario",
   /** The single call to action used everywhere on the site. */
   cta: { label: "Start a conversation", href: "/contact" },

@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
 import { Button } from "@/components/Button";
 import { Eyebrow } from "@/components/Eyebrow";
 import { Hero } from "@/components/Hero";
 import { JsonLd } from "@/components/JsonLd";
-import { LoopVideo } from "@/components/LoopVideo";
 import { Marquee } from "@/components/Marquee";
+import { NotepadStack } from "@/components/NotepadStack";
 import { Reveal } from "@/components/Reveal";
 import { Section } from "@/components/Section";
 import { Slot } from "@/components/Slot";
@@ -13,7 +12,7 @@ import { approachStages } from "@/data/approach";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "/" },
+  alternates: { canonical: "/studio" },
   title: {
     absolute: "Creative strategy and storytelling studio | Play Mode",
   },
@@ -92,44 +91,17 @@ export default function Home() {
       </Section>
 
       {/* 3. The problem */}
-      <Section>
-        <div className="grid gap-12 lg:grid-cols-12">
-          <Reveal className="lg:sticky lg:top-[calc(var(--header-height)+1.5rem)] lg:col-span-7 lg:self-start">
-            <div className="inline-block border-2 border-cream px-7 py-5">
-              <h2 className="font-display text-heading font-bold">
-                How I
-                <br />
-                accelerate growth
-              </h2>
-            </div>
-            <LoopVideo
-              src="/art/growth.mp4"
-              poster="/art/growth-poster.webp"
-              label="A short looping animation about growth."
-              width={1344}
-              height={768}
-              className="mt-8 h-auto w-full max-w-2xl"
-            />
-          </Reveal>
-          <Reveal delay={0.12} className="lg:col-span-5 lg:col-start-8 lg:pt-4">
-            {/* Square cards: each sticks near the top, the next slides over it. */}
-            <ul className="flex flex-col gap-6 lg:gap-[12vh]">
-              {pillars.map((p, i) => (
-                <li
-                  key={p.title}
-                  className={`on-light flex flex-col justify-start gap-3 border-2 border-night p-6 text-night shadow-[6px_6px_0_0_rgba(0,0,0,0.35)] lg:sticky lg:top-[calc(var(--header-height)+1.5rem+var(--i)*1.5rem)] lg:aspect-square lg:max-w-[28rem] ${p.paper}`}
-                  style={{ "--i": i } as CSSProperties}
-                >
-                  <h3 className="font-display text-heading font-bold">
-                    {p.title}
-                  </h3>
-                  <p className="text-[1.1875rem] leading-snug">{p.body}</p>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-      </Section>
+      <NotepadStack
+        heading={
+          <>
+            How I
+            <br />
+            accelerate growth
+          </>
+        }
+        notes={pillars}
+        videoLabel="A short looping animation about growth."
+      />
 
       {/* 4. What I can do for you */}
       <Section tone="cream">

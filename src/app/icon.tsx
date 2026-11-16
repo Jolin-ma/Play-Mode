@@ -19,7 +19,7 @@ export default function Icon() {
         borderRadius: 9999,
       }}
     >
-      b
+      p
     </div>,
     { ...size },
   );

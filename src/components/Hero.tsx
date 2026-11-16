@@ -7,6 +7,7 @@ import { Button } from "./Button";
 import { CursorTrail } from "./CursorTrail";
 import { HeroSweep } from "./HeroSweep";
 import { site } from "@/data/site";
+import { studioHero, type HeroContent } from "@/data/hero";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -35,7 +36,6 @@ interface Scene {
   /** Slab geometry as % of the stage (desktop). */
   slab: { l: string; w: string; t: string; b: string };
   pinkTab: boolean;
-  sub: string;
 }
 
 const SCENES: readonly Scene[] = [
@@ -47,7 +47,6 @@ const SCENES: readonly Scene[] = [
     fg: C.night,
     slab: { l: "4%", w: "92%", t: "6%", b: "2%" },
     pinkTab: true,
-    sub: "Creative strategy and storytelling, rooted in what is changing in culture.",
   },
   {
     id: "pink",
@@ -57,7 +56,6 @@ const SCENES: readonly Scene[] = [
     fg: C.night,
     slab: { l: "10%", w: "80%", t: "2%", b: "0%" },
     pinkTab: false,
-    sub: "A point of view on what is shifting, turned into something a brand can use.",
   },
   {
     id: "night",
@@ -67,29 +65,20 @@ const SCENES: readonly Scene[] = [
     fg: C.cream,
     slab: { l: "4%", w: "86%", t: "6%", b: "2%" },
     pinkTab: false,
-    sub: "Start with what I am noticing.",
   },
 ];
-
-const HEADLINES = {
-  orange: ["I build", "websites for", "what your brand"],
-  pink: ["Where", "ambitious", "ideas turn", "into real", "growth."],
-  night: [
-    ["Where", "wild", "ideas"],
-    ["and", "sharp", "data"],
-    ["share", "a", "room."],
-  ],
-} as const;
 
 const varStyle = (vars: Record<string, string>) => vars as CSSProperties;
 
 /** Scene text: headline lines rise in, then the supporting line. */
 function SceneText({
   scene,
+  content,
   intro,
   reduce,
 }: {
   scene: Scene;
+  content: HeroContent;
   intro: boolean;
   reduce: boolean | null;
 }) {
@@ -106,7 +95,7 @@ function SceneText({
   let headline: ReactNode;
   let lineCount: number;
   if (scene.id === "orange") {
-    const l = HEADLINES.orange;
+    const l = content.orange.lines;
     lineCount = l.length + 1;
     headline = (
       <>
@@ -117,13 +106,13 @@ function SceneText({
         ))}
         <m.span className="block" {...rise(l.length)}>
           <span className="relative isolate -ml-[0.06em] inline-block px-[0.12em] text-night before:absolute before:inset-[0.06em_-0.02em_0.02em_-0.02em] before:-z-10 before:rotate-[-2deg] before:bg-butter before:content-['']">
-            needs next.
+            {content.orange.mark}
           </span>
         </m.span>
       </>
     );
   } else if (scene.id === "pink") {
-    const l = HEADLINES.pink;
+    const l = content.pink;
     lineCount = l.length;
     headline = l.map((line, i) => (
       <m.span key={line} className="block" {...rise(i)}>
@@ -131,10 +120,10 @@ function SceneText({
       </m.span>
     ));
   } else {
-    lineCount = 3;
+    lineCount = content.night.length;
     headline = (
       <m.span className="block" {...rise(0)}>
-        <HeroSweep lines={HEADLINES.night} startDelay={base + 0.9} step={340} />
+        <HeroSweep lines={content.night} startDelay={base + 0.9} step={340} />
       </m.span>
     );
   }
@@ -163,7 +152,7 @@ function SceneText({
           delay: base + lineCount * T.headlineStep + 0.15,
         }}
       >
-        {scene.sub}
+        {content.subs[scene.id]}
       </m.p>
     </m.div>
   );
@@ -175,7 +164,7 @@ function SceneText({
  * last scene. Auto-play can be paused, and is off for reduced motion. Below
  * lg the slab stacks and keeps one stable height.
  */
-export function Hero() {
+export function Hero({ content = studioHero }: { content?: HeroContent }) {
   const reduce = useReducedMotion();
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
@@ -205,10 +194,7 @@ export function Hero() {
       aria-label="Introduction"
       className="relative overflow-hidden bg-night px-gutter pt-4 pb-8 lg:flex lg:min-h-[max(40rem,calc(100svh-var(--header-height)))] lg:pt-6 lg:pl-rail"
     >
-      <h1 className="sr-only">
-        I build websites for what your brand needs next. Where ambitious ideas
-        turn into real growth. Where wild ideas and sharp data share a room.
-      </h1>
+      <h1 className="sr-only">{content.srHeading}</h1>
 
       <div className="relative flex flex-col gap-4 lg:flex-1">
         {/* Pink tab behind the slab, first scene only */}
@@ -252,6 +238,7 @@ export function Hero() {
             <SceneText
               key={scene.id}
               scene={scene}
+              content={content}
               intro={intro}
               reduce={reduce}
             />
@@ -265,8 +252,12 @@ export function Hero() {
             animate={{ color: scene.fg }}
             transition={{ duration: dur, ease: EASE }}
           >
-            <Button href="/work" variant="text" className="whitespace-nowrap">
-              See the work
+            <Button
+              href={content.link.href}
+              variant="text"
+              className="whitespace-nowrap"
+            >
+              {content.link.label}
             </Button>
             <div
               role="group"
